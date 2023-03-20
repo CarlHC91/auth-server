@@ -4,7 +4,7 @@ import org.raspberry.auth.dto.model.users.UserPermissionDTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class FindOneByServicePathResponseDTO {
+public class FindOneByFilterResponseDTO {
 
 	@JsonProperty("status")
 	private String status;

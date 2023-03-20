@@ -1,16 +1,16 @@
-package org.raspberry.auth.dto.model.users;
+package org.raspberry.auth.dto.model.permissions;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UserPermissionDTO {
-
-	@JsonProperty("id_user")
-	private Long idUser;
+public class PermissionDetailsDTO {
 
 	@JsonProperty("id_permission")
 	private Long idPermission;
+
+	@JsonProperty("service_path")
+	private String servicePath;
 
 	@JsonProperty("create_date")
 	private Date createDate;
@@ -18,20 +18,20 @@ public class UserPermissionDTO {
 	@JsonProperty("update_date")
 	private Date updateDate;
 
-	public Long getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
-
 	public Long getIdPermission() {
 		return idPermission;
 	}
 
 	public void setIdPermission(Long idPermission) {
 		this.idPermission = idPermission;
+	}
+
+	public String getServicePath() {
+		return servicePath;
+	}
+
+	public void setServicePath(String servicePath) {
+		this.servicePath = servicePath;
 	}
 
 	public Date getCreateDate() {

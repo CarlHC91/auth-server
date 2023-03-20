@@ -2,7 +2,7 @@ package org.raspberry.auth.dto.operation.userpermission;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class FindOneByServicePathRequestDTO {
+public class FindOneByFilterRequestDTO {
 
 	@JsonProperty("token_api")
 	private String tokenApi;
