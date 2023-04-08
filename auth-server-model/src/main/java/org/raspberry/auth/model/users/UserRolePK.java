@@ -2,13 +2,13 @@ package org.raspberry.auth.model.users;
 
 import java.io.Serializable;
 
-public class UserPermissionPK implements Serializable {
+public class UserRolePK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long idUser;
 
-	private Long idPermission;
+	private Long idRole;
 
 	public Long getIdUser() {
 		return idUser;
@@ -18,12 +18,12 @@ public class UserPermissionPK implements Serializable {
 		this.idUser = idUser;
 	}
 
-	public Long getIdPermission() {
-		return idPermission;
+	public Long getIdRole() {
+		return idRole;
 	}
 
-	public void setIdPermission(Long idPermission) {
-		this.idPermission = idPermission;
+	public void setIdRole(Long idRole) {
+		this.idRole = idRole;
 	}
 
 }

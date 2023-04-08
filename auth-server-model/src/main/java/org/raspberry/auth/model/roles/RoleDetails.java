@@ -1,4 +1,4 @@
-package org.raspberry.auth.model.permissions;
+package org.raspberry.auth.model.roles;
 
 import java.util.Date;
 
@@ -10,16 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PERMISSION_DETAILS")
-public class PermissionDetails {
+@Table(name = "ROLE_DETAILS")
+public class RoleDetails {
 
 	@Id
-	@Column(name = "ID_PERMISSION")
+	@Column(name = "ID_ROLE")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPermission;
+	private Long idRole;
 
-	@Column(name = "SERVICE_PATH")
-	private String servicePath;
+	@Column(name = "NAME")
+	private String name;
 
 	@Column(name = "CREATE_DATE")
 	private Date createDate;
@@ -27,20 +27,20 @@ public class PermissionDetails {
 	@Column(name = "UPDATE_DATE")
 	private Date updateDate;
 
-	public Long getIdPermission() {
-		return idPermission;
+	public Long getIdRole() {
+		return idRole;
 	}
 
-	public void setIdPermission(Long idPermission) {
-		this.idPermission = idPermission;
+	public void setIdRole(Long idRole) {
+		this.idRole = idRole;
 	}
 
-	public String getServicePath() {
-		return servicePath;
+	public String getName() {
+		return name;
 	}
 
-	public void setServicePath(String servicePath) {
-		this.servicePath = servicePath;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getCreateDate() {
