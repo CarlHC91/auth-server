@@ -1,6 +1,8 @@
 package org.raspberry.auth.service.users;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.raspberry.auth.dto.common.HeaderRequestDTO;
 import org.raspberry.auth.dto.model.users.UserRoleDTO;
@@ -29,6 +31,22 @@ public class UserRoleService {
 		userRoleDTO.setUpdateDate(userRole.getUpdateDate());
 
 		return userRoleDTO;
+	}
+	
+	public List<UserRoleDTO> findAll(HeaderRequestDTO headerRequestDTO) {
+		List<UserRoleDTO> userRoleListDTO = new ArrayList<>();
+		
+		for (UserRole userRole : userRoleDao.findAll()) {
+			UserRoleDTO userRoleDTO = new UserRoleDTO();
+			userRoleDTO.setIdUser(userRole.getIdUser());
+			userRoleDTO.setIdRole(userRole.getIdRole());
+			userRoleDTO.setCreateDate(userRole.getCreateDate());
+			userRoleDTO.setUpdateDate(userRole.getUpdateDate());
+			
+			userRoleListDTO.add(userRoleDTO);
+		}
+
+		return userRoleListDTO;
 	}
 	
 	public UserRoleDTO createOne(HeaderRequestDTO headerRequestDTO, UserRoleDTO userRoleDTO) {

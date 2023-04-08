@@ -1,6 +1,8 @@
 package org.raspberry.auth.service.users;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.raspberry.auth.dto.common.HeaderRequestDTO;
 import org.raspberry.auth.dto.model.users.UserDetailsDTO;
@@ -73,6 +75,27 @@ public class UserDetailsService {
 		return userDetailsDTO;
 	}
 
+	public List<UserDetailsDTO> findAll(HeaderRequestDTO headerRequestDTO) {
+		List<UserDetailsDTO> userDetailsListDTO = new ArrayList<>();
+		
+		
+		for (UserDetails userDetails : userDetailsDao.findAll()) {
+			UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
+			userDetailsDTO.setIdUser(userDetails.getIdUser());
+			userDetailsDTO.setUsername(userDetails.getUsername());
+			userDetailsDTO.setPassword(userDetails.getPassword());
+			userDetailsDTO.setTokenApi(userDetails.getTokenApi());
+			userDetailsDTO.setFirstName(userDetails.getFirstName());
+			userDetailsDTO.setLastName(userDetails.getLastName());
+			userDetailsDTO.setCreateDate(userDetails.getCreateDate());
+			userDetailsDTO.setUpdateDate(userDetails.getUpdateDate());
+			
+			userDetailsListDTO.add(userDetailsDTO);
+		}
+
+		return userDetailsListDTO;
+	}
+	
 	public UserDetailsDTO createOne(HeaderRequestDTO headerRequestDTO, UserDetailsDTO userDetailsDTO) {
 		UserDetails userDetails = new UserDetails();
 		userDetails.setUsername(userDetailsDTO.getUsername());

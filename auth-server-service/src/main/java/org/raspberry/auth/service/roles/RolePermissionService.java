@@ -1,6 +1,8 @@
 package org.raspberry.auth.service.roles;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.raspberry.auth.dto.common.HeaderRequestDTO;
 import org.raspberry.auth.dto.model.roles.RolePermissionDTO;
@@ -46,6 +48,23 @@ public class RolePermissionService {
 		rolePermissionDTO.setUpdateDate(rolePermission.getUpdateDate());
 
 		return rolePermissionDTO;
+	}
+	
+	public List<RolePermissionDTO> findAll(HeaderRequestDTO headerRequestDTO) {
+		List<RolePermissionDTO> rolePermissionListDTO = new ArrayList<>();
+
+		for (RolePermission rolePermission : rolePermissionDao.findAll()) {
+			RolePermissionDTO rolePermissionDTO = new RolePermissionDTO();
+			rolePermissionDTO.setIdPermission(rolePermission.getIdPermission());
+			rolePermissionDTO.setIdRole(rolePermission.getIdRole());
+			rolePermissionDTO.setServicePath(rolePermission.getServicePath());
+			rolePermissionDTO.setCreateDate(rolePermission.getCreateDate());
+			rolePermissionDTO.setUpdateDate(rolePermission.getUpdateDate());
+
+			rolePermissionListDTO.add(rolePermissionDTO);
+		}
+		
+		return rolePermissionListDTO;
 	}
 	
 	public RolePermissionDTO createOne(HeaderRequestDTO headerRequestDTO, RolePermissionDTO rolePermissionDTO) {
