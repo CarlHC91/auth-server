@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDetailsDao extends JpaRepository<UserDetails, Long> {
 
+	@Query("SELECT entity FROM UserDetails entity WHERE entity.idUser = :idUser")
+	public UserDetails findOneById(@Param("idUser") Long idUser);
+
 	@Query("SELECT entity FROM UserDetails entity WHERE entity.tokenApi = :tokenApi")
 	public UserDetails findOneByTokenApi(@Param("tokenApi") String tokenApi);
 
