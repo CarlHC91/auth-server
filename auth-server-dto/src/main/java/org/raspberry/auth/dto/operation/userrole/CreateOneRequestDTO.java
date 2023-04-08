@@ -1,17 +1,17 @@
-package org.raspberry.auth.dto.operation.userdetails;
+package org.raspberry.auth.dto.operation.userrole;
 
 import org.raspberry.auth.dto.common.HeaderRequestDTO;
-import org.raspberry.auth.dto.model.users.UserDetailsDTO;
+import org.raspberry.auth.dto.model.users.UserRoleDTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class FindOneByUsernameRequestDTO {
+public class CreateOneRequestDTO {
 
 	@JsonProperty("header_request")
 	private HeaderRequestDTO headerRequest;
 
-	@JsonProperty("user_details")
-	private UserDetailsDTO userDetails;
+	@JsonProperty("user_role")
+	private UserRoleDTO userRole;
 
 	public HeaderRequestDTO getHeaderRequest() {
 		return headerRequest;
@@ -21,12 +21,12 @@ public class FindOneByUsernameRequestDTO {
 		this.headerRequest = headerRequest;
 	}
 
-	public UserDetailsDTO getUserDetails() {
-		return userDetails;
+	public UserRoleDTO getUserRole() {
+		return userRole;
 	}
 
-	public void setUserDetails(UserDetailsDTO userDetails) {
-		this.userDetails = userDetails;
+	public void setUserRole(UserRoleDTO userRole) {
+		this.userRole = userRole;
 	}
 
 }

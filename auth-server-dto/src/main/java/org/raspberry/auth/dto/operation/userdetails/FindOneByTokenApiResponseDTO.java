@@ -4,7 +4,7 @@ import org.raspberry.auth.dto.model.users.UserDetailsDTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class FindOneByUsernameResponseDTO {
+public class FindOneByTokenApiResponseDTO {
 
 	@JsonProperty("user_details")
 	private UserDetailsDTO userDetails;
