@@ -1,6 +1,4 @@
-package org.raspberry.auth.model.users;
-
-import java.util.Date;
+package org.raspberry.auth.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,12 +30,6 @@ public class UserDetails {
 
 	@Column(name = "LAST_NAME")
 	private String lastName;
-
-	@Column(name = "CREATE_DATE")
-	private Date createDate;
-
-	@Column(name = "UPDATE_DATE")
-	private Date updateDate;
 
 	public Long getIdUser() {
 		return idUser;
@@ -85,22 +77,6 @@ public class UserDetails {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
 	}
 
 }
