@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.raspberry</groupId>
-			<artifactId>auth-server-rest</artifactId>
+			<artifactId>auth-server-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
