@@ -6,7 +6,6 @@ import java.util.List;
 import org.raspberry.auth.dao.repositories.UserAuthorityDao;
 import org.raspberry.auth.exception.ServiceException;
 import org.raspberry.auth.model.entities.UserAuthority;
-import org.raspberry.auth.pojos.entities.RequestHeaderVO;
 import org.raspberry.auth.pojos.entities.UserAuthorityVO;
 import org.raspberry.auth.pojos.entities.UserDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class UserAuthorityService {
 	@Autowired
 	private UserAuthorityDao userAuthorityDao;
 	
-	public List<UserAuthorityVO> findAllByUser(RequestHeaderVO requestHeaderVO, UserDetailsVO userDetailsVO) {
+	public List<UserAuthorityVO> findAllByUser(UserDetailsVO userDetailsVO) {
 		List<UserAuthorityVO> userAuthorityListVO = new ArrayList<>();
 
 		for (UserAuthority userAuthority : userAuthorityDao.findAllByUser(userDetailsVO.getIdUser())) {
@@ -33,7 +32,7 @@ public class UserAuthorityService {
 		return userAuthorityListVO;
 	}
 	
-	public UserAuthorityVO createOne(RequestHeaderVO requestHeaderVO, UserAuthorityVO userAuthorityVO) {
+	public UserAuthorityVO createOne(UserAuthorityVO userAuthorityVO) {
 		UserAuthority userAuthority = new UserAuthority();
 		userAuthority.setIdUser(userAuthorityVO.getIdUser());
 		userAuthority.setName(userAuthorityVO.getName());
@@ -47,7 +46,7 @@ public class UserAuthorityService {
 		return userAuthorityVO;
 	}
 	
-	public UserAuthorityVO updateOne(RequestHeaderVO requestHeaderVO, UserAuthorityVO userAuthorityVO) {
+	public UserAuthorityVO updateOne(UserAuthorityVO userAuthorityVO) {
 		UserAuthority userAuthority = userAuthorityDao.findOneById(userAuthorityVO.getIdAuthority());
 		if (userAuthority == null) {
 			throw new ServiceException("UserAuthority [IdAuthority: " + userAuthorityVO.getIdAuthority() + "] not exists");
@@ -65,7 +64,7 @@ public class UserAuthorityService {
 		return userAuthorityVO;
 	}
 	
-	public void deleteOne(RequestHeaderVO requestHeaderVO, UserAuthorityVO userAuthorityVO) {
+	public void deleteOne(UserAuthorityVO userAuthorityVO) {
 		UserAuthority userAuthority = userAuthorityDao.findOneById(userAuthorityVO.getIdAuthority());
 		if (userAuthority == null) {
 			throw new ServiceException("UserAuthority [IdAuthority: " + userAuthorityVO.getIdAuthority() + "] not exists");

@@ -2,7 +2,6 @@ package org.raspberry.auth.iface;
 
 import java.util.List;
 
-import org.raspberry.auth.pojos.entities.RequestHeaderVO;
 import org.raspberry.auth.pojos.entities.UserDetailsVO;
 import org.raspberry.auth.pojos.operations.userdetails.CreateOne_IN;
 import org.raspberry.auth.pojos.operations.userdetails.CreateOne_OUT;
@@ -13,6 +12,8 @@ import org.raspberry.auth.pojos.operations.userdetails.FindAll_OUT;
 import org.raspberry.auth.pojos.operations.userdetails.UpdateOne_IN;
 import org.raspberry.auth.pojos.operations.userdetails.UpdateOne_OUT;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,11 +23,12 @@ public class UserDetailsIface {
 	@Value("${iface.server.auth.path}")
 	private String path;
 
-	public List<UserDetailsVO> findAll(RequestHeaderVO requestHeaderVO) {
-		String url = path + "/api/userDetails/findAll";
+	public List<UserDetailsVO> findAll() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String url = path + "/userDetails/findAll?token_api=" + authentication.getPrincipal();
 
 		FindAll_IN findAll_IN = new FindAll_IN();
-		findAll_IN.setRequestHeader(requestHeaderVO);
 
 		RestTemplate restTemplate = new RestTemplate();
 		FindAll_OUT findAll_OUT = restTemplate.postForObject(url, findAll_IN, FindAll_OUT.class);
@@ -34,11 +36,12 @@ public class UserDetailsIface {
 		return findAll_OUT.getUserDetailsList();
 	}
 	
-	public UserDetailsVO createOne(RequestHeaderVO requestHeaderVO, UserDetailsVO userDetailsVO) {
-		String url = path + "/api/userDetails/createOne";
+	public UserDetailsVO createOne(UserDetailsVO userDetailsVO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String url = path + "/userDetails/createOne?token_api=" + authentication.getPrincipal();
 
 		CreateOne_IN createOne_IN = new CreateOne_IN();
-		createOne_IN.setRequestHeader(requestHeaderVO);
 		createOne_IN.setUserDetails(userDetailsVO);
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -47,11 +50,12 @@ public class UserDetailsIface {
 		return createOne_OUT.getUserDetails();
 	}
 	
-	public UserDetailsVO updateOne(RequestHeaderVO requestHeaderVO, UserDetailsVO userDetailsVO) {
-		String url = path + "/api/userDetails/updateOne";
+	public UserDetailsVO updateOne(UserDetailsVO userDetailsVO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String url = path + "/userDetails/updateOne?token_api=" + authentication.getPrincipal();
 
 		UpdateOne_IN updateOne_IN = new UpdateOne_IN();
-		updateOne_IN.setRequestHeader(requestHeaderVO);
 		updateOne_IN.setUserDetails(userDetailsVO);
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -60,11 +64,12 @@ public class UserDetailsIface {
 		return updateOne_OUT.getUserDetails();
 	}
 	
-	public void deleteOne(RequestHeaderVO requestHeaderVO, UserDetailsVO userDetailsVO) {
-		String url = path + "/api/userDetails/deleteOne";
+	public void deleteOne(UserDetailsVO userDetailsVO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String url = path + "/userDetails/deleteOne?token_api=" + authentication.getPrincipal();
 
 		DeleteOne_IN deleteOne_IN = new DeleteOne_IN();
-		deleteOne_IN.setRequestHeader(requestHeaderVO);
 		deleteOne_IN.setUserDetails(userDetailsVO);
 
 		RestTemplate restTemplate = new RestTemplate();

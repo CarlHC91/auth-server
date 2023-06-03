@@ -22,7 +22,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -37,11 +42,10 @@
 
 	<modules>
 		<module>auth-server-app</module>
-		<module>auth-server-dto</module>
+		<module>auth-server-dao</module>
 		<module>auth-server-iface</module>
 		<module>auth-server-model</module>
-		<module>auth-server-repository</module>
-		<module>auth-server-rest</module>
+		<module>auth-server-pojos</module>
 		<module>auth-server-service</module>
 	</modules>
 </project>

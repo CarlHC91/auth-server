@@ -1,4 +1,4 @@
-package org.raspberry;
+package org.raspberry.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
