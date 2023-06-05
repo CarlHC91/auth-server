@@ -1,5 +1,6 @@
-package org.raspberry.auth.security;
+package org.raspberry.auth.config;
 
+import org.raspberry.auth.security.JWTAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-
-	 @Autowired
-	 private JWTAuthorizationFilter jwtAuthorizationFilter;
+	
+	@Autowired
+	private JWTAuthorizationFilter jwtAuthorizationFilter;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
