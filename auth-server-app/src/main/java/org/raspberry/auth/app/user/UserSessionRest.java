@@ -1,9 +1,9 @@
-package org.raspberry.auth.app;
+package org.raspberry.auth.app.user;
 
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 import org.raspberry.auth.pojos.operations.usersession.FindOneByTokenApi_IN;
 import org.raspberry.auth.pojos.operations.usersession.FindOneByTokenApi_OUT;
-import org.raspberry.auth.service.UserSessionService;
+import org.raspberry.auth.service.user.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;

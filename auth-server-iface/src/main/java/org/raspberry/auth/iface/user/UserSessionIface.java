@@ -1,6 +1,6 @@
-package org.raspberry.auth.iface;
+package org.raspberry.auth.iface.user;
 
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 import org.raspberry.auth.pojos.operations.usersession.FindOneByTokenApi_IN;
 import org.raspberry.auth.pojos.operations.usersession.FindOneByTokenApi_OUT;
 import org.springframework.beans.factory.annotation.Value;

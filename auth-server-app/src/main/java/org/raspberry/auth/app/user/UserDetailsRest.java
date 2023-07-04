@@ -1,8 +1,8 @@
-package org.raspberry.auth.app;
+package org.raspberry.auth.app.user;
 
 import java.util.List;
 
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 import org.raspberry.auth.pojos.operations.userdetails.CreateOne_IN;
 import org.raspberry.auth.pojos.operations.userdetails.CreateOne_OUT;
 import org.raspberry.auth.pojos.operations.userdetails.DeleteOne_IN;
@@ -11,7 +11,7 @@ import org.raspberry.auth.pojos.operations.userdetails.FindAll_IN;
 import org.raspberry.auth.pojos.operations.userdetails.FindAll_OUT;
 import org.raspberry.auth.pojos.operations.userdetails.UpdateOne_IN;
 import org.raspberry.auth.pojos.operations.userdetails.UpdateOne_OUT;
-import org.raspberry.auth.service.UserDetailsService;
+import org.raspberry.auth.service.user.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;

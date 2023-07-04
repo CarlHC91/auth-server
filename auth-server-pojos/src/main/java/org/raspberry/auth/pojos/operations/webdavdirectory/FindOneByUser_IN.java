@@ -1,10 +1,10 @@
-package org.raspberry.auth.pojos.operations.userdetails;
+package org.raspberry.auth.pojos.operations.webdavdirectory;
 
 import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DeleteOne_IN {
+public class FindOneByUser_IN {
 
 	@JsonProperty("user_details")
 	private UserDetailsVO userDetails;

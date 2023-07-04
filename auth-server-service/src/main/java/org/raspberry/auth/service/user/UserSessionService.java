@@ -1,8 +1,8 @@
-package org.raspberry.auth.service;
+package org.raspberry.auth.service.user;
 
-import org.raspberry.auth.dao.repositories.UserDetailsDao;
-import org.raspberry.auth.model.entities.UserDetails;
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.dao.user.UserDetailsDao;
+import org.raspberry.auth.model.user.UserDetails;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

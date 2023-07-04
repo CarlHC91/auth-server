@@ -2,7 +2,7 @@ package org.raspberry.auth.pojos.operations.userdetails;
 
 import java.util.List;
 
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

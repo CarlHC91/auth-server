@@ -1,8 +1,8 @@
-package org.raspberry.auth.dao.repositories;
+package org.raspberry.auth.dao.user;
 
 import java.util.List;
 
-import org.raspberry.auth.model.entities.UserAuthority;
+import org.raspberry.auth.model.user.UserAuthority;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

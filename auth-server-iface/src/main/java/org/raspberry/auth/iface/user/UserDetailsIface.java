@@ -1,8 +1,8 @@
-package org.raspberry.auth.iface;
+package org.raspberry.auth.iface.user;
 
 import java.util.List;
 
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 import org.raspberry.auth.pojos.operations.userdetails.CreateOne_IN;
 import org.raspberry.auth.pojos.operations.userdetails.CreateOne_OUT;
 import org.raspberry.auth.pojos.operations.userdetails.DeleteOne_IN;

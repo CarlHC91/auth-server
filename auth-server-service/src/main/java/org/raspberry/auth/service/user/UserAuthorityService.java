@@ -1,13 +1,13 @@
-package org.raspberry.auth.service;
+package org.raspberry.auth.service.user;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.raspberry.auth.dao.repositories.UserAuthorityDao;
+import org.raspberry.auth.dao.user.UserAuthorityDao;
 import org.raspberry.auth.exception.ServiceException;
-import org.raspberry.auth.model.entities.UserAuthority;
-import org.raspberry.auth.pojos.entities.UserAuthorityVO;
-import org.raspberry.auth.pojos.entities.UserDetailsVO;
+import org.raspberry.auth.model.user.UserAuthority;
+import org.raspberry.auth.pojos.entities.user.UserAuthorityVO;
+import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

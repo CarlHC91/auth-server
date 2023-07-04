@@ -1,6 +1,6 @@
 package org.raspberry.auth.pojos.operations.userauthority;
 
-import org.raspberry.auth.pojos.entities.UserAuthorityVO;
+import org.raspberry.auth.pojos.entities.user.UserAuthorityVO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

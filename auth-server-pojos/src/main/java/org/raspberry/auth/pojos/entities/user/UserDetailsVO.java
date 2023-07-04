@@ -1,4 +1,4 @@
-package org.raspberry.auth.pojos.entities;
+package org.raspberry.auth.pojos.entities.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

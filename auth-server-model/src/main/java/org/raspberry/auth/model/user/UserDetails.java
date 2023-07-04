@@ -1,4 +1,4 @@
-package org.raspberry.auth.model.entities;
+package org.raspberry.auth.model.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
