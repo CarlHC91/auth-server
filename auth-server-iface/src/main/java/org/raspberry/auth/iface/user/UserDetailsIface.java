@@ -72,7 +72,7 @@ public class UserDetailsIface {
 		params.put("id_user", userDetailsVO.getIdUser());
 
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(url, null, null, params);
+		restTemplate.postForObject(url, null, Void.class, params);
 	}
 	
 }

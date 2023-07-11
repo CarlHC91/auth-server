@@ -70,7 +70,7 @@ public class UserAuthorityIface {
 		params.put("id_authority", userAuthorityVO.getIdAuthority());
 
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(url, null, null, params);
+		restTemplate.postForObject(url, null, Void.class, params);
 	}
 
 }
