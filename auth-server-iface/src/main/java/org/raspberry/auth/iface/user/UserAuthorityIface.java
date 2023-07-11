@@ -1,20 +1,11 @@
 package org.raspberry.auth.iface.user;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.raspberry.auth.pojos.entities.user.UserAuthorityVO;
 import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
-import org.raspberry.auth.pojos.operations.userauthority.CreateOne_IN;
-import org.raspberry.auth.pojos.operations.userauthority.CreateOne_OUT;
-import org.raspberry.auth.pojos.operations.userauthority.DeleteOne_IN;
-import org.raspberry.auth.pojos.operations.userauthority.DeleteOne_OUT;
-import org.raspberry.auth.pojos.operations.userauthority.FindAllByUser_IN;
-import org.raspberry.auth.pojos.operations.userauthority.FindAllByUser_OUT;
-import org.raspberry.auth.pojos.operations.userauthority.UpdateOne_IN;
-import org.raspberry.auth.pojos.operations.userauthority.UpdateOne_OUT;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,58 +15,62 @@ public class UserAuthorityIface {
 	@Value("${iface.server.auth.path}")
 	private String path;
 
-	public List<UserAuthorityVO> findAllByUser(UserDetailsVO userDetailsVO) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	public UserAuthorityVO findOneById(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
+		String url = path + "/userAuthority/findOneById?token_api={token_api}&id_authority={id_authority}";
 
-		String url = path + "/userAuthority/findAllByUser?token_api=" + authentication.getPrincipal();
-
-		FindAllByUser_IN findAllByUser_IN = new FindAllByUser_IN();
-		findAllByUser_IN.setUserDetails(userDetailsVO);
+		Map<String, Object> params = new HashMap<>();
+		params.put("token_api", userSessionVO.getTokenApi());
+		params.put("id_authority", userAuthorityVO.getIdAuthority());
 
 		RestTemplate restTemplate = new RestTemplate();
-		FindAllByUser_OUT findAllByUser_OUT = restTemplate.postForObject(url, findAllByUser_IN, FindAllByUser_OUT.class);
+		return restTemplate.postForObject(url, null, UserAuthorityVO.class, params);
+	}
+		
+	public UserAuthorityVO[] findAllByUser(UserDetailsVO userSessionVO, UserDetailsVO userDetailsVO) {
+		String url = path + "/userAuthority/findAllByUser?token_api={token_api}&id_user={id_user}";
 
-		return findAllByUser_OUT.getUserAuthorityList();
+		Map<String, Object> params = new HashMap<>();
+		params.put("token_api", userSessionVO.getTokenApi());
+		params.put("id_user", userDetailsVO.getIdUser());
+
+		RestTemplate restTemplate = new RestTemplate();
+		return restTemplate.postForObject(url, null, UserAuthorityVO[].class, params);
 	}
 
-	public UserAuthorityVO createOne(UserAuthorityVO userAuthorityVO) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	public UserAuthorityVO createOne(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
+		String url = path + "/userAuthority/createOne?token_api={token_api}&id_user={id_user}&name={name}";
 
-		String url = path + "/userAuthority/createOne?token_api=" + authentication.getPrincipal();
-
-		CreateOne_IN createOne_IN = new CreateOne_IN();
-		createOne_IN.setUserAuthority(userAuthorityVO);
+		Map<String, Object> params = new HashMap<>();
+		params.put("token_api", userSessionVO.getTokenApi());
+		params.put("id_user", userAuthorityVO.getIdUser());
+		params.put("name", userAuthorityVO.getName());
 
 		RestTemplate restTemplate = new RestTemplate();
-		CreateOne_OUT createOne_OUT = restTemplate.postForObject(url, createOne_IN, CreateOne_OUT.class);
-
-		return createOne_OUT.getUserAuthority();
+		return restTemplate.postForObject(url, null, UserAuthorityVO.class, params);
 	}
 
-	public UserAuthorityVO updateOne(UserAuthorityVO userAuthorityVO) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	public UserAuthorityVO updateOne(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
+		String url = path + "/userAuthority/updateOne?token_api={token_api}&id_authority={id_authority}&id_user={id_user}&name={name}";
 
-		String url = path + "/userAuthority/updateOne?token_api=" + authentication.getPrincipal();
-
-		UpdateOne_IN updateOne_IN = new UpdateOne_IN();
-		updateOne_IN.setUserAuthority(userAuthorityVO);
+		Map<String, Object> params = new HashMap<>();
+		params.put("token_api", userSessionVO.getTokenApi());
+		params.put("id_authority", userAuthorityVO.getIdAuthority());
+		params.put("id_user", userAuthorityVO.getIdUser());
+		params.put("name", userAuthorityVO.getName());
 
 		RestTemplate restTemplate = new RestTemplate();
-		UpdateOne_OUT updateOne_OUT = restTemplate.postForObject(url, updateOne_IN, UpdateOne_OUT.class);
-
-		return updateOne_OUT.getUserAuthority();
+		return restTemplate.postForObject(url, null, UserAuthorityVO.class, params);
 	}
 
-	public void deleteOne(UserAuthorityVO userAuthorityVO) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	public void deleteOne(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
+		String url = path + "/userAuthority/deleteOne?token_api={token_api}&id_authority={id_authority}";
 
-		String url = path + "/userAuthority/deleteOne?token_api=" + authentication.getPrincipal();
-
-		DeleteOne_IN deleteOne_IN = new DeleteOne_IN();
-		deleteOne_IN.setUserAuthority(userAuthorityVO);
+		Map<String, Object> params = new HashMap<>();
+		params.put("token_api", userSessionVO.getTokenApi());
+		params.put("id_authority", userAuthorityVO.getIdAuthority());
 
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(url, deleteOne_IN, DeleteOne_OUT.class);
+		restTemplate.postForObject(url, null, null, params);
 	}
 
 }

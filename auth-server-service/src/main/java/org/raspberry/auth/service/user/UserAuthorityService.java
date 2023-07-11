@@ -16,8 +16,22 @@ public class UserAuthorityService {
 
 	@Autowired
 	private UserAuthorityDao userAuthorityDao;
-	
-	public List<UserAuthorityVO> findAllByUser(UserDetailsVO userDetailsVO) {
+
+	public UserAuthorityVO findOneById(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
+		UserAuthority userAuthority = userAuthorityDao.findOneById(userAuthorityVO.getIdAuthority());
+		if (userAuthority == null) {
+			return null;
+		}
+
+		userAuthorityVO = new UserAuthorityVO();
+		userAuthorityVO.setIdAuthority(userAuthority.getIdAuthority());
+		userAuthorityVO.setIdUser(userAuthority.getIdUser());
+		userAuthorityVO.setName(userAuthority.getName());
+
+		return userAuthorityVO;
+	}
+
+	public UserAuthorityVO[] findAllByUser(UserDetailsVO userSessionVO, UserDetailsVO userDetailsVO) {
 		List<UserAuthorityVO> userAuthorityListVO = new ArrayList<>();
 
 		for (UserAuthority userAuthority : userAuthorityDao.findAllByUser(userDetailsVO.getIdUser())) {
@@ -28,11 +42,11 @@ public class UserAuthorityService {
 
 			userAuthorityListVO.add(userAuthorityVO);
 		}
-		
-		return userAuthorityListVO;
+
+		return userAuthorityListVO.toArray(new UserAuthorityVO[userAuthorityListVO.size()]);
 	}
-	
-	public UserAuthorityVO createOne(UserAuthorityVO userAuthorityVO) {
+
+	public UserAuthorityVO createOne(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
 		UserAuthority userAuthority = new UserAuthority();
 		userAuthority.setIdUser(userAuthorityVO.getIdUser());
 		userAuthority.setName(userAuthorityVO.getName());
@@ -45,13 +59,13 @@ public class UserAuthorityService {
 
 		return userAuthorityVO;
 	}
-	
-	public UserAuthorityVO updateOne(UserAuthorityVO userAuthorityVO) {
+
+	public UserAuthorityVO updateOne(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
 		UserAuthority userAuthority = userAuthorityDao.findOneById(userAuthorityVO.getIdAuthority());
 		if (userAuthority == null) {
-			throw new ServiceException("UserAuthority [IdAuthority: " + userAuthorityVO.getIdAuthority() + "] not exists");
+			throw new ServiceException("Authority '" + userAuthorityVO.getIdAuthority() + "' not exists");
 		}
-		
+
 		userAuthority.setIdUser(userAuthorityVO.getIdUser());
 		userAuthority.setName(userAuthorityVO.getName());
 		userAuthority = userAuthorityDao.save(userAuthority);
@@ -63,11 +77,11 @@ public class UserAuthorityService {
 
 		return userAuthorityVO;
 	}
-	
-	public void deleteOne(UserAuthorityVO userAuthorityVO) {
+
+	public void deleteOne(UserDetailsVO userSessionVO, UserAuthorityVO userAuthorityVO) {
 		UserAuthority userAuthority = userAuthorityDao.findOneById(userAuthorityVO.getIdAuthority());
 		if (userAuthority == null) {
-			throw new ServiceException("UserAuthority [IdAuthority: " + userAuthorityVO.getIdAuthority() + "] not exists");
+			throw new ServiceException("Authority '" + userAuthorityVO.getIdAuthority() + "' not exists");
 		}
 
 		userAuthorityDao.delete(userAuthority);

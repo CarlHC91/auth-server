@@ -20,7 +20,7 @@
 
 		<dependency>
 			<groupId>org.raspberry</groupId>
-			<artifactId>auth-server-pojos</artifactId>
+			<artifactId>auth-server-iface</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

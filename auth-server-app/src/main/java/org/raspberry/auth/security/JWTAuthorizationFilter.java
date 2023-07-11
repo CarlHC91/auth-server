@@ -34,22 +34,20 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		String tokenApi = request.getParameter("token_api");
 
 		if (tokenApi != null) {
-			UserDetailsVO userDetailsVO = new UserDetailsVO();
-			userDetailsVO.setTokenApi(tokenApi);
-			
-			userDetailsVO = userSessionService.findOneByTokenApi(userDetailsVO);
+			UserDetailsVO userSessionVO = new UserDetailsVO();
+			userSessionVO.setTokenApi(tokenApi);
+
+			UserDetailsVO userDetailsVO = userSessionService.findOneByTokenApi(userSessionVO);
 			if (userDetailsVO != null) {
 				List<GrantedAuthority> authorityList = new ArrayList<>();
-				
-				SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(tokenApi, null, authorityList));
-				
-				for (UserAuthorityVO userAuthorityVO : userAuthorityService.findAllByUser(userDetailsVO)) {
+
+				for (UserAuthorityVO userAuthorityVO : userAuthorityService.findAllByUser(userSessionVO, userDetailsVO)) {
 					GrantedAuthority authority = new SimpleGrantedAuthority(userAuthorityVO.getName());
-					
+
 					authorityList.add(authority);
 				}
-				
-				SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(tokenApi, null, authorityList));
+
+				SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetailsVO, tokenApi, authorityList));
 			}
 		}
 

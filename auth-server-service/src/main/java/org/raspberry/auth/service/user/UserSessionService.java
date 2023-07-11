@@ -12,21 +12,38 @@ public class UserSessionService {
 	@Autowired
 	private UserDetailsDao userDetailsDao;
 
-	public UserDetailsVO findOneByTokenApi(UserDetailsVO userDetailsVO) {
-		UserDetails userDetails = userDetailsDao.findOneByTokenApi(userDetailsVO.getTokenApi());
-		if (userDetails == null) {
+	public UserDetailsVO findOneByTokenApi(UserDetailsVO userSessionVO) {
+		UserDetails userSession = userDetailsDao.findOneByTokenApi(userSessionVO.getTokenApi());
+		if (userSession == null) {
 			return null;
 		}
 
-		userDetailsVO = new UserDetailsVO();
-		userDetailsVO.setIdUser(userDetails.getIdUser());
-		userDetailsVO.setUsername(userDetails.getUsername());
-		userDetailsVO.setPassword(userDetails.getPassword());
-		userDetailsVO.setTokenApi(userDetails.getTokenApi());
-		userDetailsVO.setFirstName(userDetails.getFirstName());
-		userDetailsVO.setLastName(userDetails.getLastName());
+		userSessionVO = new UserDetailsVO();
+		userSessionVO.setIdUser(userSession.getIdUser());
+		userSessionVO.setUsername(userSession.getUsername());
+		userSessionVO.setPassword(userSession.getPassword());
+		userSessionVO.setTokenApi(userSession.getTokenApi());
+		userSessionVO.setFirstName(userSession.getFirstName());
+		userSessionVO.setLastName(userSession.getLastName());
 
-		return userDetailsVO;
+		return userSessionVO;
+	}
+	
+	public UserDetailsVO findOneByUsername(UserDetailsVO userSessionVO) {
+		UserDetails userSession = userDetailsDao.findOneByUsername(userSessionVO.getUsername(), userSessionVO.getPassword());
+		if (userSession == null) {
+			return null;
+		}
+
+		userSessionVO = new UserDetailsVO();
+		userSessionVO.setIdUser(userSession.getIdUser());
+		userSessionVO.setUsername(userSession.getUsername());
+		userSessionVO.setPassword(userSession.getPassword());
+		userSessionVO.setTokenApi(userSession.getTokenApi());
+		userSessionVO.setFirstName(userSession.getFirstName());
+		userSessionVO.setLastName(userSession.getLastName());
+
+		return userSessionVO;
 	}
 
 }

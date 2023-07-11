@@ -1,23 +1,13 @@
 package org.raspberry.auth.app.user;
 
-import java.util.List;
-
 import org.raspberry.auth.pojos.entities.user.UserDetailsVO;
-import org.raspberry.auth.pojos.operations.userdetails.CreateOne_IN;
-import org.raspberry.auth.pojos.operations.userdetails.CreateOne_OUT;
-import org.raspberry.auth.pojos.operations.userdetails.DeleteOne_IN;
-import org.raspberry.auth.pojos.operations.userdetails.DeleteOne_OUT;
-import org.raspberry.auth.pojos.operations.userdetails.FindAll_IN;
-import org.raspberry.auth.pojos.operations.userdetails.FindAll_OUT;
-import org.raspberry.auth.pojos.operations.userdetails.UpdateOne_IN;
-import org.raspberry.auth.pojos.operations.userdetails.UpdateOne_OUT;
 import org.raspberry.auth.service.user.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,53 +16,68 @@ public class UserDetailsRest {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-	@PreAuthorize("hasAuthority('/auth/userDetails/findAll')")
-	@PostMapping(produces = "application/json", consumes = "application/json", value = "/userDetails/findAll")
-	public ResponseEntity<FindAll_OUT> findAll(RequestEntity<FindAll_IN> requestEntityDTO) {
-		List<UserDetailsVO> userDetailsListVO = userDetailsService.findAll();
+	@PostMapping("/userDetails/findOneById")
+	@PreAuthorize("hasDetails('/auth/userDetails/findOneById')")
+	public UserDetailsVO findOneById(@RequestParam("id_user") Long idUser) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsVO userSessionVO = (UserDetailsVO) authentication.getPrincipal();
 
-		FindAll_OUT findAll_OUT = new FindAll_OUT();
-		findAll_OUT.setUserDetailsList(userDetailsListVO);
+		UserDetailsVO userDetailsVO = new UserDetailsVO();
+		userDetailsVO.setIdUser(idUser);
 
-		return ResponseEntity.status(HttpStatus.OK).body(findAll_OUT);
+		return userDetailsService.findOneById(userSessionVO, userDetailsVO);
 	}
 
-	@PreAuthorize("hasAuthority('/auth/userDetails/createOne')")
-	@PostMapping(produces = "application/json", consumes = "application/json", value = "/userDetails/createOne")
-	public ResponseEntity<CreateOne_OUT> createOne(RequestEntity<CreateOne_IN> requestEntityDTO) {
-		CreateOne_IN createOne_IN = requestEntityDTO.getBody();
+	@PostMapping("/userDetails/findAll")
+	@PreAuthorize("hasDetails('/auth/userDetails/findAll')")
+	public UserDetailsVO[] findAll() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsVO userSessionVO = (UserDetailsVO) authentication.getPrincipal();
 
-		UserDetailsVO userDetailsVO = userDetailsService.createOne(createOne_IN.getUserDetails());
-
-		CreateOne_OUT createOne_OUT = new CreateOne_OUT();
-		createOne_OUT.setUserDetails(userDetailsVO);
-
-		return ResponseEntity.status(HttpStatus.OK).body(createOne_OUT);
+		return userDetailsService.findAll(userSessionVO);
 	}
 
-	@PreAuthorize("hasAuthority('/auth/userDetails/updateOne')")
-	@PostMapping(produces = "application/json", consumes = "application/json", value = "/userDetails/updateOne")
-	public ResponseEntity<UpdateOne_OUT> updateOne(RequestEntity<UpdateOne_IN> requestEntityDTO) {
-		UpdateOne_IN updateOne_IN = requestEntityDTO.getBody();
+	@PostMapping("/userDetails/createOne")
+	@PreAuthorize("hasDetails('/auth/userDetails/createOne')")
+	public UserDetailsVO createOne(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsVO userSessionVO = (UserDetailsVO) authentication.getPrincipal();
 
-		UserDetailsVO userDetailsVO = userDetailsService.updateOne(updateOne_IN.getUserDetails());
+		UserDetailsVO userDetailsVO = new UserDetailsVO();
+		userDetailsVO.setUsername(username);
+		userDetailsVO.setPassword(password);
+		userDetailsVO.setFirstName(firstName);
+		userDetailsVO.setLastName(lastName);
 
-		UpdateOne_OUT updateOne_OUT = new UpdateOne_OUT();
-		updateOne_OUT.setUserDetails(userDetailsVO);
-
-		return ResponseEntity.status(HttpStatus.OK).body(updateOne_OUT);
+		return userDetailsService.createOne(userSessionVO, userDetailsVO);
 	}
+	
+	@PostMapping("/userDetails/updateOne")
+	@PreAuthorize("hasDetails('/auth/userDetails/updateOne')")
+	public UserDetailsVO updateOne(@RequestParam("id_user") Long idUser, @RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsVO userSessionVO = (UserDetailsVO) authentication.getPrincipal();
 
-	@PreAuthorize("hasAuthority('/auth/userDetails/deleteOne')")
-	@PostMapping(produces = "application/json", consumes = "application/json", value = "/userDetails/deleteOne")
-	public ResponseEntity<DeleteOne_OUT> deleteOne(RequestEntity<DeleteOne_IN> requestEntityDTO) {
-		DeleteOne_IN deleteOne_IN = requestEntityDTO.getBody();
+		UserDetailsVO userDetailsVO = new UserDetailsVO();
+		userDetailsVO.setIdUser(idUser);
+		userDetailsVO.setUsername(username);
+		userDetailsVO.setPassword(password);
+		userDetailsVO.setFirstName(firstName);
+		userDetailsVO.setLastName(lastName);
 
-		userDetailsService.deleteOne(deleteOne_IN.getUserDetails());
+		return userDetailsService.updateOne(userSessionVO, userDetailsVO);
+	}
+	
+	@PostMapping("/userDetails/deleteOne")
+	@PreAuthorize("hasDetails('/auth/userDetails/deleteOne')")
+	public void deleteOne(@RequestParam("id_user") Long idUser) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsVO userSessionVO = (UserDetailsVO) authentication.getPrincipal();
 
-		DeleteOne_OUT deleteOne_OUT = new DeleteOne_OUT();
+		UserDetailsVO userDetailsVO = new UserDetailsVO();
+		userDetailsVO.setIdUser(idUser);
 
-		return ResponseEntity.status(HttpStatus.OK).body(deleteOne_OUT);
+		userDetailsService.deleteOne(userSessionVO, userDetailsVO);
 	}
 
 }
