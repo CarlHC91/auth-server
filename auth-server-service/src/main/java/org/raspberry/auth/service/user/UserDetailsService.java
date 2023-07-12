@@ -81,7 +81,7 @@ public class UserDetailsService {
 		
 		userDetails.setUsername(userDetailsVO.getUsername());
 		userDetails.setPassword(userDetailsVO.getPassword());
-		userDetails.setTokenApi(userDetailsVO.getTokenApi());
+		userDetails.setTokenApi(UUID.randomUUID().toString());
 		userDetails.setFirstName(userDetailsVO.getFirstName());
 		userDetails.setLastName(userDetailsVO.getLastName());
 		userDetails = userDetailsDao.save(userDetails);
